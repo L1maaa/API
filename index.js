@@ -2,13 +2,15 @@ const express = require("express")
 const app = express()
 const port = 3000
 app.use(express.json())
-app.get("/bemvindo", (req, res)=>{
-    res.send("Olá, seja bem vindo a API")
+
+const usuarios = []
+
+app.post("/usuarios", (req, res)=>{
+    const usuario = req.body
+    usuarios.push(usuario)
+    res.send("Usuario cadastrado com sucesso!")
 })
-app.post("/bemvindo", (req, res)=>{
-    const dados = req.body
-    res.send("Olá, seja bem vindo" +  dados.nome)
-})
+
 app.listen(port, ()=>{
     console.log("API RODANDO NA PORTA" + port)
 })
