@@ -1,16 +1,22 @@
+// npm init
+//npm i express
 const express = require("express")
 const app = express()
 const port = 3000
 app.use(express.json())
 
-const usuarios = []
+//npm i mysql2
+const db = require("./db")
 
-app.post("/usuarios", (req, res)=>{
-    const usuario = req.body
-    usuarios.push(usuario)
-    res.send("Usuario cadastrado com sucesso!")
+app.get("/clientes", async (req, res) => {
+    try{
+        const resultado = await db.pool.query("SELECT * FROM clientes")
+        res.status(200).json(resultado[0])
+    } catch (erro){
+        console.log(erro)
+    }
 })
 
 app.listen(port, ()=>{
-    console.log("API RODANDO NA PORTA" + port)
+    console.log("API EXECUTANDO NA PORTA " + port)
 })
