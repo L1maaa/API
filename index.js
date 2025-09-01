@@ -8,9 +8,9 @@ app.use(express.json())
 //npm i mysql2
 const db = require("./db")
 
-app.get("/clientes", async (req, res) => {
+app.get("/cliente", async (req, res) => {
     try{
-        const resultado = await db.pool.query("SELECT * FROM clientes")
+        const resultado = await db.pool.query("SELECT * FROM cliente")
         res.status(200).json(resultado[0])
     } catch (erro){
         console.log(erro)
